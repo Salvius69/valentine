@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffd6e8;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 40px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  text-align: center;
+  max-width: 360px;
+}
+
+.emoji {
+  font-size: 56px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+
+.buttons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#yesBtn {
+  background: #ff4b8b;
+  color: #fff;
+}
+
+#yesBtn:hover {
+  transform: scale(1.05);
+}
+
+#noBtn {
+  background: #eee;
+}
+
+.note {
+  font-size: 12px;
+  color: #777;
+}
