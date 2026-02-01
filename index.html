@@ -2,183 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Just one question</title>
-
+  <title>Hey [Name]</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle at top, #1e293b, #020617);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Segoe UI", sans-serif;
-      color: #e5e7eb;
-      overflow: hidden;
+      margin: 0; height: 100vh;
+      background: radial-gradient(circle at 30% 20%, #1e1b4b 0%, #0f0f23 50%, #000 100%);
+      display: flex; justify-content: center; align-items: center;
+      font-family: "Segoe UI", sans-serif; color: #e5e7eb; overflow: hidden;
+      position: relative;
     }
-
-    body::before {
-      content: "♡   ♥   ♡   ♥   ♡";
-      position: absolute;
-      top: 12%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 48px;
-      opacity: 0.07;
-      letter-spacing: 24px;
-      pointer-events: none;
+    
+    /* SPARKLES & GLITTERS */
+    .sparkles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+    }
+    .sparkle {
+      position: absolute; color: #fbbf24; font-size: 12px; animation: sparkle 3s infinite linear;
+      text-shadow: 0 0 8px #fbbf24;
+    }
+    @keyframes sparkle {
+      0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-20px) scale(1) rotate(360deg); opacity: 0; }
+    }
+    
+    /* FLOATING HEARTS */
+    .hearts {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+    }
+    .heart {
+      position: absolute; color: rgba(251, 191, 36, 0.6); font-size: 14px;
+      animation: heartFloat 8s infinite linear; text-shadow: 0 0 12px currentColor;
+    }
+    @keyframes heartFloat {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-50px) rotate(720deg); opacity: 0; }
     }
 
     .card {
-      background: rgba(15, 23, 42, 0.92);
-      padding: 56px 48px;
-      border-radius: 30px;
-      width: 440px;
-      text-align: center;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.05),
-        0 40px 80px rgba(0,0,0,0.65);
-      backdrop-filter: blur(10px);
-      animation: pop 0.7s ease;
-      position: relative;
+      background: rgba(15, 23, 42, 0.95); padding: 48px 36px; border-radius: 28px;
+      width: min(360px, 90vw); text-align: center; box-shadow: 
+        0 0 0 1px rgba(251, 191, 36, 0.3),
+        0 0 40px rgba(251, 191, 36, 0.1),
+        0 40px 80px rgba(0,0,0,0.7);
+      animation: glowPulse 3s infinite ease-in-out; backdrop-filter: blur(16px);
+      position: relative; z-index: 10;
     }
-
-    @keyframes pop {
-      from {
-        opacity: 0;
-        transform: scale(0.95) translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(251,191,36,0.3), 0 0 40px rgba(251,191,36,0.1), 0 40px 80px rgba(0,0,0,0.7); }
+      50% { box-shadow: 0 0 0 1px rgba(251,191,36,0.5), 0 0 60px rgba(251,191,36,0.25), 0 50px 100px rgba(0,0,0,0.8); }
     }
+    @keyframes pop { from { opacity: 0; transform: scale(0.95) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .card { animation: pop 0.8s ease; }
 
-    h2 {
-      margin-top: 0;
-      font-size: 24px;
-      font-weight: 600;
-    }
-
-    p {
-      font-size: 15.5px;
-      color: #9ca3af;
-      margin: 18px 0 36px;
-      line-height: 1.6;
-    }
-
-    .actions {
-      position: relative;
-      height: 80px;
-    }
-
-    button {
-      padding: 16px 38px;
-      border-radius: 999px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      transition: transform 0.15s ease;
-    }
-
+    h2 { margin: 0 0 12px; font-weight: 700; font-size: 22px; letter-spacing: 0.5px; }
+    p { font-size: 15px; color: #d1d5db; margin: 0 0 36px; line-height: 1.55; }
+    
+    .actions { display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap; }
+    
     #yes {
-      background: linear-gradient(135deg, #fb7185, #e11d48);
-      color: white;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 14px 34px rgba(225, 29, 72, 0.45);
+      background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1f2937;
+      padding: 16px 40px; border-radius: 999px; font-size: 17px; font-weight: 600;
+      border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 12px 32px rgba(251, 191, 36, 0.5); position: relative; overflow: hidden;
     }
-
-    #yes:hover {
-      transform: translateX(-50%) scale(1.1);
+    #yes::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; 
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s; 
     }
-
+    #yes:hover::before { left: 100%; }
+    #yes:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 20px 48px rgba(251, 191, 36, 0.7); }
+    
     #no {
-      background: transparent;
-      color: #9ca3af;
-      border: 1px solid rgba(255,255,255,0.15);
-      left: 20%;
-      top: 0;
+      color: #9ca3af; cursor: pointer; font-size: 15px; position: relative;
+      transition: all 0.3s ease; user-select: none; font-style: italic;
     }
+    #no:hover { color: #fbbf24; text-shadow: 0 0 12px rgba(251, 191, 36, 0.5); transform: scale(1.05); }
 
-    .ending {
-      animation: fadeIn 1s ease forwards;
+    /* SUCCESS SCREEN */
+    .ending { animation: fadeInCelebrate 1.2s ease forwards; }
+    @keyframes fadeInCelebrate {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .ending h2 {
-      font-size: 26px;
-    }
-
-    .ending p {
-      font-size: 16px;
-      color: #d1d5db;
-      margin-top: 16px;
-    }
+    .ending h2 { font-size: 24px; background: linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .ending p { font-size: 16px; color: #d1d5db; margin-bottom: 16px; }
+    .ending .flirty { color: #fbbf24; font-style: italic; animation: wink 2s infinite; }
+    @keyframes wink { 0%, 90%, 100% { opacity: 1; } 95% { opacity: 0.7; } }
+    
+    @media (max-width: 480px) { .card { padding: 40px 28px; margin: 20px; } h2 { font-size: 20px; } }
   </style>
 </head>
-
 <body>
+  <!-- SPARKLES -->
+  <div class="sparkles" id="sparkles"></div>
+  <!-- HEARTS -->
+  <div class="hearts" id="hearts"></div>
+  
   <div class="card" id="card">
-    <h2>Hey Akshara</h2>
+    <h2>Hey [Partner's Name]</h2>
     <p>
-      I could’ve sent a normal message.<br>
-      But this felt more… special.
+      Normal "hi" is boring.<br>
+      This felt more... <span style="color:#fbbf24;">you ✨</span>
     </p>
-
-    <p>
-      So here’s the question.
-    </p>
-
     <div class="actions">
-      <button id="yes">Yes 💗</button>
-      <button id="no">No</button>
+      <button id="yes">Yes, obviously 💫</button>
+      <span id="no">Maybe... nervous 😳</span>
     </div>
   </div>
 
   <script>
-    const no = document.getElementById("no");
-    const yes = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
     const card = document.getElementById("card");
+    const sparkles = document.getElementById("sparkles");
+    const hearts = document.getElementById("hearts");
+    
+    let sparkleId = 0, heartId = 0;
 
-    function moveNo() {
-      const x = Math.random() * 260;
-      const y = Math.random() * 40;
-      no.style.left = x + "px";
-      no.style.top = y + "px";
-    }
+    // Continuous sparkles
+    setInterval(() => {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.innerHTML = ['✨','⭐','💫','🌟'][Math.floor(Math.random()*4)];
+      sparkle.style.left = Math.random() * 100 + '%';
+      sparkle.style.animationDuration = (Math.random()*2 + 2) + 's';
+      sparkles.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 3000);
+    }, 400);
 
-    no.addEventListener("mouseenter", moveNo);
-    no.addEventListener("click", moveNo);
+    // Floating hearts
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = ['♡','♥','💖','💕'][Math.floor(Math.random()*4)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (Math.random()*4 + 5) + 's';
+      hearts.appendChild(heart);
+      setTimeout(() => heart.remove(), 9000);
+    }, 1500);
 
-    yes.addEventListener("click", () => {
+    // Shy No button dances away
+    let noHovers = 0;
+    noBtn.addEventListener("mouseenter", () => {
+      noHovers++;
+      const danceIntensity = noHovers * 15;
+      const x = (Math.random() - 0.5) * danceIntensity;
+      const y = (Math.random() - 0.5) * danceIntensity / 2;
+      noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*10 - 5}deg)`;
+      noBtn.textContent = noHovers > 2 ? "Stop teasing me! 😤" : "Not so fast...";
+    });
+
+    // Flirty romantic ending
+    yesBtn.addEventListener("click", () => {
+      card.className = "card ending";
       card.innerHTML = `
-        <div class="ending">
-          <h2>Yay! I knew you'd say yes 💖</h2>
-          <p>
-            You just made my day.<br>
-            And maybe my February too.
-          </p>
-          <p>
-            See you on our date 😉
-          </p>
+        <h2>💖 Knew you'd say yes 💖</h2>
+        <p>It's only Feb 1st... but I couldn't wait till the 14th.</p>
+        <p class="flirty">Will you be <strong>my</strong> Valentine? <br> (The flirty kind 😘)</p>
+        <div class="actions" style="gap:12px;">
+          <button id="reset" style="
+            background: linear-gradient(135deg, #fbbf24, #f59e0b); color:#1f2937;
+            padding:12px 24px; border-radius:999px; font-size:15px; border:none;
+            cursor:pointer; box-shadow:0 8px 24px rgba(251,191,36,0.5);
+          ">Try again? ✨</button>
         </div>
       `;
+      document.getElementById('reset').onclick = () => location.reload();
+      
+      // Victory sparkles explosion
+      for(let i=0; i<30; i++) {
+        setTimeout(() => {
+          const burst = document.createElement('div');
+          burst.className = 'sparkle';
+          burst.innerHTML = '💖✨';
+          burst.style.left = '50%';
+          burst.style.fontSize = '20px';
+          burst.style.animationDuration = '1s';
+          sparkles.appendChild(burst);
+          setTimeout(() => burst.remove(), 1000);
+        }, i*50);
+      }
     });
   </script>
 </body>
