@@ -21,7 +21,6 @@
       overflow: hidden;
     }
 
-    /* faint hearts */
     body::before {
       content: "♡   ♥   ♡   ♥   ♡";
       position: absolute;
@@ -38,13 +37,14 @@
       background: rgba(15, 23, 42, 0.92);
       padding: 56px 48px;
       border-radius: 30px;
-      width: 420px;
+      width: 440px;
       text-align: center;
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.05),
         0 40px 80px rgba(0,0,0,0.65);
       backdrop-filter: blur(10px);
       animation: pop 0.7s ease;
+      position: relative;
     }
 
     @keyframes pop {
@@ -62,21 +62,18 @@
       margin-top: 0;
       font-size: 24px;
       font-weight: 600;
-      letter-spacing: 0.4px;
     }
 
     p {
       font-size: 15.5px;
       color: #9ca3af;
-      margin: 18px 0 40px;
+      margin: 18px 0 36px;
       line-height: 1.6;
     }
 
     .actions {
-      display: flex;
-      gap: 26px;
-      justify-content: center;
-      align-items: center;
+      position: relative;
+      height: 80px;
     }
 
     button {
@@ -85,32 +82,30 @@
       font-size: 16px;
       border: none;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: absolute;
+      transition: transform 0.15s ease;
     }
 
     #yes {
       background: linear-gradient(135deg, #fb7185, #e11d48);
       color: white;
+      left: 50%;
+      transform: translateX(-50%);
       box-shadow: 0 14px 34px rgba(225, 29, 72, 0.45);
     }
 
     #yes:hover {
-      transform: scale(1.1);
-      box-shadow: 0 18px 44px rgba(225, 29, 72, 0.6);
+      transform: translateX(-50%) scale(1.1);
     }
 
     #no {
       background: transparent;
       color: #9ca3af;
       border: 1px solid rgba(255,255,255,0.15);
+      left: 20%;
+      top: 0;
     }
 
-    #no:hover {
-      transform: scale(0.95);
-      opacity: 0.7;
-    }
-
-    /* ending */
     .ending {
       animation: fadeIn 1s ease forwards;
     }
@@ -147,7 +142,7 @@
     </p>
 
     <p>
-      So here’s the question I’ve been wanting to ask.
+      So here’s the question.
     </p>
 
     <div class="actions">
@@ -157,40 +152,30 @@
   </div>
 
   <script>
-    const yes = document.getElementById("yes");
     const no = document.getElementById("no");
+    const yes = document.getElementById("yes");
     const card = document.getElementById("card");
 
-    // gentle avoidance, not aggressive
-    no.addEventListener("mouseenter", () => {
-      no.style.transform = "translateX(8px)";
-      setTimeout(() => {
-        no.style.transform = "translateX(0)";
-      }, 200);
-    });
+    function moveNo() {
+      const x = Math.random() * 260;
+      const y = Math.random() * 40;
+      no.style.left = x + "px";
+      no.style.top = y + "px";
+    }
+
+    no.addEventListener("mouseenter", moveNo);
+    no.addEventListener("click", moveNo);
 
     yes.addEventListener("click", () => {
       card.innerHTML = `
         <div class="ending">
-          <h2>Yay! I knew you’d say yes 💖</h2>
+          <h2>Yay! I knew you'd say yes 💖</h2>
           <p>
             You just made my day.<br>
             And maybe my February too.
           </p>
           <p>
-            See you on our date? 😉
-          </p>
-        </div>
-      `;
-    });
-
-    no.addEventListener("click", () => {
-      card.innerHTML = `
-        <div class="ending">
-          <h2>That’s okay 💙</h2>
-          <p>
-            I’m still glad you checked this out.<br>
-            Some things are worth asking anyway.
+            See you on our date 😉
           </p>
         </div>
       `;
