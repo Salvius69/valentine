@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Just a question</title>
+  <title>Just one question</title>
 
   <style>
     * {
@@ -12,118 +12,138 @@
     body {
       margin: 0;
       height: 100vh;
-      background: #fff1f5;
+      background: radial-gradient(circle at top, #1f2937, #020617);
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: "Segoe UI", sans-serif;
-      color: #1f2937;
+      color: #e5e7eb;
       overflow: hidden;
     }
 
-    /* soft floating hearts */
+    /* subtle floating hearts */
     body::before {
-      content: "💗 💕 💖 💘 💝";
+      content: "♡  ♥  ♡  ♥";
       position: absolute;
-      top: 12%;
+      top: 15%;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 40px;
-      opacity: 0.15;
+      font-size: 42px;
+      opacity: 0.08;
+      letter-spacing: 18px;
       pointer-events: none;
     }
 
     .card {
-      background: #ffffff;
-      padding: 40px 32px;
-      border-radius: 24px;
-      width: 320px;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 42px 36px;
+      border-radius: 26px;
+      width: 340px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-      animation: pop 0.6s ease;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 30px 60px rgba(0,0,0,0.6);
+      animation: pop 0.7s ease;
+      backdrop-filter: blur(8px);
     }
 
     @keyframes pop {
       from {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.96) translateY(8px);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
       }
     }
 
     h2 {
       margin-top: 0;
       font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 0.3px;
     }
 
     p {
-      font-size: 14px;
-      color: #6b7280;
-      margin-bottom: 28px;
+      font-size: 14.5px;
+      color: #9ca3af;
+      margin: 14px 0 32px;
+      line-height: 1.5;
     }
 
     .actions {
       display: flex;
-      gap: 20px;
+      gap: 22px;
       justify-content: center;
       align-items: center;
     }
 
     #yes {
-      background: #e11d48;
+      background: linear-gradient(135deg, #fb7185, #e11d48);
       color: white;
-      padding: 14px 32px;
+      padding: 14px 34px;
       border-radius: 999px;
       font-size: 16px;
       border: none;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 10px 20px rgba(225, 29, 72, 0.35);
+      box-shadow: 0 12px 30px rgba(225, 29, 72, 0.45);
     }
 
     #yes:hover {
-      transform: scale(1.08);
-      box-shadow: 0 14px 28px rgba(225, 29, 72, 0.45);
+      transform: scale(1.1);
+      box-shadow: 0 16px 40px rgba(225, 29, 72, 0.6);
     }
 
     #no {
-      color: #6b7280;
+      color: #9ca3af;
       cursor: pointer;
       font-size: 14px;
       position: relative;
       transition: transform 0.2s ease;
       user-select: none;
+      opacity: 0.9;
     }
 
     /* ending screen */
     .ending {
-      animation: fadeIn 0.8s ease forwards;
+      animation: fadeIn 1s ease forwards;
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
+    .ending h2 {
+      font-size: 22px;
+    }
+
+    .ending p {
+      font-size: 15px;
+      color: #d1d5db;
+    }
   </style>
 </head>
 
 <body>
   <div class="card" id="card">
-    <h2>I made this instead of sending a message</h2>
-    <p>So I’ll just ask properly.</p>
+    <h2>Hey Akshara</h2>
+    <p>
+      I could’ve sent a normal message.<br>
+      But this felt more… memorable.
+    </p>
 
     <div class="actions">
       <button id="yes">Yes 💗</button>
-      <span id="no">I’m shy…</span>
+      <span id="no">I’m nervous…</span>
     </div>
   </div>
 
@@ -132,21 +152,24 @@
     const yes = document.getElementById("yes");
     const card = document.getElementById("card");
 
-    // shy escape movement
+    // shy, gentle escape
     no.addEventListener("mouseenter", () => {
-      const x = Math.random() * 120 - 60;
-      const y = Math.random() * 60 - 30;
+      const x = Math.random() * 100 - 50;
+      const y = Math.random() * 50 - 25;
       no.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    // custom ending screen
+    // romantic ending
     yes.addEventListener("click", () => {
       card.innerHTML = `
         <div class="ending">
-          <h2>I knew it wasn’t a bug 💖</h2>
+          <h2>Okay… I’m glad 💖</h2>
           <p>
-            It’s Feb 1.<br>
-            I thought I’d start early.
+            It’s February 1.<br>
+            I just didn’t want to wait till the 14th.
+          </p>
+          <p>
+            Would you like to be my Valentine, Akshara?
           </p>
         </div>
       `;
